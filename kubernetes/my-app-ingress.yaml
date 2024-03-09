@@ -1,0 +1,18 @@
+apiVersion: networking.k8s.io/v1
+kind: Ingress
+metadata:
+  name: my-app-ingress
+  annotations:
+    kubernetes.io/ingress.class: nginx  # Use the appropriate ingress controller class (e.g., nginx, traefik, etc.)
+spec:
+  rules:
+    - host: myapp1.local  # Replace with your desired hostname
+      http:
+        paths:
+          - path: /
+            pathType: Prefix
+            backend:
+              service:
+                name: my-app-service  # This should match the name of your Service
+                port:
+                  number: 80  # This should match the port number in your Service
