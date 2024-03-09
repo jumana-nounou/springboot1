@@ -1,0 +1,27 @@
+version: '3'
+services:
+  db:
+    image: mysql:5.7
+    restart: always
+    environment:
+      MYSQL_ROOT_PASSWORD: 12345678
+      MYSQL_DATABASE: springboot
+      MYSQL_USER: jumanadb
+      MYSQL_PASSWORD: your_password
+    ports:
+      - "3000:3306"
+    volumes:
+      - my-db:/var/lib/mysql
+  web-app:
+    depends_on:
+        - db
+    restart: on-failure
+    links: 
+        - "db:db"
+    build: 
+      context: . 
+      dockerfile: Dockerfile
+    ports:
+      - "8080:8080" 
+volumes:  
+  my-db:  
