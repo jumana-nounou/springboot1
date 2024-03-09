@@ -46,6 +46,11 @@ jobs:
       with:
         version: 'latest'
 
+    - name: Set up Kubernetes Service Account and ClusterRoleBinding
+      run: |
+        kubectl apply -f kubernetes/service-account.yaml
+        kubectl apply -f kubernetes/cluster-role-binding.yaml
+
     - name: Apply Kubernetes Deployment
       run: |
         kubectl apply -f kubernetes/deployment.yaml
