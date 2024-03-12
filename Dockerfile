@@ -1,10 +1,13 @@
-FROM openjdk:17-jdk-alpine
+# Build
+FROM maven:3.8.3-openjdk-17 AS build
+WORKDIR /app
+COPY pom.xml .
+COPY src/ /app/src/
+RUN mvn package
 
-COPY ./target/*.jar java.jar
-
-# Expose the port the app runs on
+# Runtime
+FROM openjdk:17-jdk-alpine AS runtime
+WORKDIR /app
+COPY --from=build /app/target/*.jar java.jar
 EXPOSE 8080
-
-# Run the jar file
 CMD ["java", "-jar", "java.jar"]
-
