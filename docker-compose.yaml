@@ -6,8 +6,8 @@ services:
     environment:
       MYSQL_ROOT_PASSWORD: 12345678
       MYSQL_DATABASE: springboot
-      MYSQL_USER: jumanadb
-      MYSQL_PASSWORD: your_password
+      MYSQL_USER: ${DB_USERNAME}
+      MYSQL_PASSWORD: ${DB_PASSWORD}
     ports:
       - "3000:3306"
     volumes:
