@@ -15,7 +15,11 @@ jobs:
       run: |
         sudo apt-get update
         sudo apt-get install -y curl unzip
-
+    - name: Set Permissions
+      run: |
+        sudo chown -R runner:runner /mnt/c/Users/DELL/Desktop/spring-boot-mysql-example-master/actions-runner/_work/
+        sudo chmod -R 700 /mnt/c/Users/DELL/Desktop/spring-boot-mysql-example-master/actions-runner/_work/
+        
     - name: Set up JDK
       uses: actions/setup-java@v2
       with:
