@@ -18,10 +18,10 @@ jobs:
     #     sudo apt-get install -y curl unzip
 
     # Set permissions for the GitHub Actions working directory
-    - name: Set Permissions
-      run: |
-        sudo chown -R jumananounou:jumananounou /mnt/c/Users/DELL/Desktop/spring-boot-mysql-example-master/actions-runner/_work/
-        sudo chmod -R 777 /mnt/c/Users/DELL/Desktop/spring-boot-mysql-example-master/actions-runner/_work/
+    # - name: Set Permissions
+    #   run: |
+    #     sudo chown -R jumananounou:jumananounou /mnt/c/Users/DELL/Desktop/spring-boot-mysql-example-master/actions-runner/_work/
+    #     sudo chmod -R 777 /mnt/c/Users/DELL/Desktop/spring-boot-mysql-example-master/actions-runner/_work/
 
     - name: Set up JDK
       uses: actions/setup-java@v2
