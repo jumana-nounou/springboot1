@@ -11,50 +11,62 @@ jobs:
     steps:
     - name: Checkout code
       uses: actions/checkout@v3
-    - name: Install dependencies
-      run: |
-        sudo apt-get update
-        sudo apt-get install -y curl unzip
+
+    # - name: Install dependencies
+    #   run: |
+    #     sudo apt-get update
+    #     sudo apt-get install -y curl unzip
+
+    # Set permissions for the GitHub Actions working directory
     - name: Set Permissions
       run: |
         sudo chown -R jumananounou:jumananounou /mnt/c/Users/DELL/Desktop/spring-boot-mysql-example-master/actions-runner/_work/
         sudo chmod -R 777 /mnt/c/Users/DELL/Desktop/spring-boot-mysql-example-master/actions-runner/_work/
+
+    # Set up JDK
     - name: Set up JDK
       uses: actions/setup-java@v2
       with:
         distribution: 'adopt'
         java-version: '11'
 
+    # Build JAR using Maven
     - name: Build JAR
       run: mvn package
 
+    # Build Docker image
     - name: Build Docker image
       run: |
         DOCKER_TAG="${{ github.sha }}"
         docker build . -t spring-boot-1:$DOCKER_TAG
         docker tag spring-boot-1:$DOCKER_TAG ${{ secrets.DOCKERHUB_USERNAME }}/spring-boot-1:$DOCKER_TAG
 
+    # Login to Docker Hub
     - name: Login to Docker Hub
       uses: docker/login-action@v2
       with:
         username: ${{ secrets.DOCKERHUB_USERNAME }}
         password: ${{ secrets.DOCKERHUB_PASSWORD }}
 
+    # Push Docker image to Docker Hub
     - name: Push Docker image to Docker Hub
       run: |
         DOCKER_TAG="${{ github.sha }}"
         docker push ${{ secrets.DOCKERHUB_USERNAME }}/spring-boot-1:$DOCKER_TAG
 
+    # Setup kubectl
     - name: Setup kubectl
       uses: azure/setup-kubectl@v1
       with:
         version: 'latest'
 
+    # Set up Kubernetes Service Account and ClusterRoleBinding
     - name: Set up Kubernetes Service Account and ClusterRoleBinding
       run: |
         kubectl apply -f kubernetes/service-account.yaml
         kubectl apply -f kubernetes/cluster-role-binding.yaml
 
+    # Apply Kubernetes Deployment
     - name: Apply Kubernetes Deployment
       run: |
         kubectl apply -f kubernetes/deployment.yaml
