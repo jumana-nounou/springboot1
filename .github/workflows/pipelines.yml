@@ -27,7 +27,7 @@ jobs:
       run: |
           sudo apt-get update
           sudo apt-get install -y curl
-          curl -sL https://github.com/actions/setup-java/releases/latest/download/setup-java.sh     
+          curl -sL https://github.com/actions/setup-java/releases/latest/download/setup-java.sh | bash    
 
     # Build JAR using Maven
     - name: Build JAR
