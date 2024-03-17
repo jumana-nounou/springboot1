@@ -25,11 +25,11 @@ jobs:
 
     # Set up JDK
     - name: Set up JDK
-      uses: actions/setup-java@v2
-      with:
-        distribution: 'adopt'
-        java-version: '11'
-
+    run: sudo -E actions/setup-java@v2
+    with:
+      distribution: 'adopt'
+      java-version: '11'
+  
     # Build JAR using Maven
     - name: Build JAR
       run: mvn package
