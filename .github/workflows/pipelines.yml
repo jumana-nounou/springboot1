@@ -17,18 +17,18 @@ jobs:
     #     sudo apt-get update
     #     sudo apt-get install -y curl unzip
 
-    # Set permissions for the GitHub Actions working directory
-    - name: Set Permissions
-      run: |
-        sudo chown -R jumananounou:jumananounou /mnt/c/Users/DELL/Desktop/spring-boot-mysql-example-master/actions-runner/_work/
-        sudo chmod -R 777 /mnt/c/Users/DELL/Desktop/spring-boot-mysql-example-master/actions-runner/_work/
+    # # Set permissions for the GitHub Actions working directory
+    # - name: Set Permissions
+    #   run: |
+    #     sudo chown -R jumananounou:jumananounou /mnt/c/Users/DELL/Desktop/spring-boot-mysql-example-master/actions-runner/_work/
+    #     sudo chmod -R 777 /mnt/c/Users/DELL/Desktop/spring-boot-mysql-example-master/actions-runner/_work/
 
     - name: Set up JDK
       run: |
           sudo apt-get update
           sudo apt-get install -y curl
-          curl -sL https://github.com/actions/setup-java/releases/latest/download/setup-java.sh | sudo bash -s -- -d 'adopt' -v '11'
-      
+          curl -sL https://github.com/actions/setup-java/releases/latest/download/setup-java.sh     
+
     # Build JAR using Maven
     - name: Build JAR
       run: mvn package
