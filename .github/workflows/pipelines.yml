@@ -18,8 +18,7 @@ jobs:
     - name: Set Permissions
       run: |
         sudo chown -R jumananounou:jumananounou /mnt/c/Users/DELL/Desktop/spring-boot-mysql-example-master/actions-runner/_work/
-        sudo chmod -R 700 /mnt/c/Users/DELL/Desktop/spring-boot-mysql-example-master/actions-runner/_work/
-
+        sudo chmod -R 777 /mnt/c/Users/DELL/Desktop/spring-boot-mysql-example-master/actions-runner/_work/
     - name: Set up JDK
       uses: actions/setup-java@v2
       with:
