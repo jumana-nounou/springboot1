@@ -1,37 +1,21 @@
-name: CI/CD Pipeline
+name: CD Pipeline
 
 on:
-  push:
-    branches:
-      - master
+  workflow_dispatch:
 
 jobs:
-  build-and-deploy:
+  
+  build:
     runs-on: self-hosted
     steps:
     - name: Checkout code
       uses: actions/checkout@v3
 
-    # - name: Install dependencies
-    #   run: |
-    #     sudo apt-get update
-    #     sudo apt-get install -y curl unzip
-
-    # Set permissions for the GitHub Actions working directory
-    # - name: Set Permissions
-    #   run: |
-    #     sudo chown -R jumananounou:jumananounou /mnt/c/Users/DELL/Desktop/spring-boot-mysql-example-master/actions-runner/_work/
-    #     sudo chmod -R 777 /mnt/c/Users/DELL/Desktop/spring-boot-mysql-example-master/actions-runner/_work/
-
-    - name: Set up JDK
-      uses: actions/setup-java@v2
-      with:
-       distribution: 'adopt'
-       java-version: '11' 
-
-    # Build JAR using Maven
-    - name: Build JAR
-      run: mvn package
+  deploy:
+    runs-on: self-hosted
+    steps:
+    - name: Checkout code
+      uses: actions/checkout@v3
 
     # Build Docker image
     - name: Build Docker image
@@ -69,3 +53,5 @@ jobs:
     - name: Apply Kubernetes Deployment
       run: |
         kubectl apply -f kubernetes/deployment.yaml
+
+     
